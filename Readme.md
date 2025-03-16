@@ -3,7 +3,7 @@
 * 개인 용도로 만든 간단한 메모장 크롬 확장 프로그램.
 
 
-
+![main](https://github.com/asadal/asadal-memos/blob/main/img/asadal-memos.png)
 
 
 
