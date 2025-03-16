@@ -1,7 +1,7 @@
 :root {
     --font-title: "Paperlogy-6SemiBold", sans-serif;
     --font-body: "Paperlogy-3Light", sans-serif;
-    --bg-color-light: #f9fafb; /* 옅은 회색 배경 */
+    --bg-color-light: #f5f5f5; /* 옅은 회색 배경 */
     --content-bg-light: #ffffff; /* 메모 입력칸 배경 */
     --text-color-light: #1f2937;
     --border-color-light: #e5e7eb;
