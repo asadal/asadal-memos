@@ -1,0 +1,322 @@
+:root {
+    --font-title: "Paperlogy-6SemiBold", sans-serif;
+    --font-body: "Paperlogy-3Light", sans-serif;
+    --bg-color-light: #f9fafb; /* 옅은 회색 배경 */
+    --content-bg-light: #ffffff; /* 메모 입력칸 배경 */
+    --text-color-light: #1f2937;
+    --border-color-light: #e5e7eb;
+    --accent-color-light: #3b82f6;
+    --hover-color-light: #f3f4f6;
+    --bg-color-dark: #1e293b; /* 다크모드 배경색 더 옅게 변경 */
+    --content-bg-dark: #334155; /* 메모 입력칸 배경 (다크모드) - 더 옅게 변경 */
+    --text-color-dark: #f9fafb;
+    --border-color-dark: #475569;
+    --accent-color-dark: #60a5fa;
+    --hover-color-dark: #334155;
+    --icon-color-light: #4b5563;
+    --icon-color-dark: #ffffff; /* 다크모드에서 아이콘 색상 흰색으로 변경 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    width: 380px;
+    height: 600px;
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+}
+
+body.light-mode {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+/* 아이콘 색상 조정 */
+body.light-mode svg {
+    stroke: var(--icon-color-light);
+    fill: var(--icon-color-light);
+}
+
+body.dark-mode svg {
+    stroke: var(--icon-color-dark);
+    fill: var(--icon-color-dark);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 12px;
+}
+
+/* 헤더 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid;
+    border-color: inherit;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-family: var(--font-title);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--hover-color-light);
+}
+
+body.dark-mode #theme-toggle:hover {
+    background-color: var(--hover-color-dark);
+}
+
+/* 다크모드에서 아이콘 특별 처리 */
+body.dark-mode #theme-icon,
+body.dark-mode #download-btn img {
+    filter: brightness(1.5); /* 아이콘 밝기 증가 */
+}
+
+/* 탭 스타일 */
+.tab-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+    margin-bottom: 12px;
+}
+
+.tabs {
+    display: flex;
+    flex: 1;
+    background-color: var(--content-bg-light);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+body.dark-mode .tabs {
+    background-color: var(--content-bg-dark);
+}
+
+.tab-btn {
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    font-size: 14px;
+    flex: 1;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.tab-btn.active {
+    background-color: var(--accent-color-light);
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .tab-btn.active {
+    background-color: var(--accent-color-dark);
+    color: white;
+}
+
+.font-selector {
+    padding: 0 4px;
+    margin-left: 8px;
+}
+
+#font-family-selector {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: inherit;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4L6 8L10 4' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+}
+
+body.dark-mode #font-family-selector {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4L6 8L10 4' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 메모 컨테이너 */
+.memo-container {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    border: 1px solid;
+    border-color: inherit;
+    border-radius: 8px;
+    background-color: var(--content-bg-light);
+}
+
+body.dark-mode .memo-container {
+    background-color: var(--content-bg-dark);
+}
+
+.memo-content {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    overflow-y: auto;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* 폰트 크기 */
+.memo-content.font-small {
+    font-size: 14px;
+}
+
+.memo-content.font-medium {
+    font-size: 16px;
+}
+
+.memo-content.font-large {
+    font-size: 18px;
+}
+
+/* 하이퍼링크 스타일 */
+.memo-content a {
+    color: var(--accent-color-light);
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    pointer-events: all !important;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+body.dark-mode .memo-content a {
+    color: var(--accent-color-dark);
+}
+
+.memo-content a:hover {
+    border-bottom: 1px solid;
+}
+
+/* contenteditable 요소에서 링크 클릭 가능하게 설정 */
+.memo-content[contenteditable="true"] {
+    position: relative;
+}
+
+.memo-content[contenteditable="true"]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 푸터 스타일 */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 4px;
+    margin-top: 12px;
+}
+
+.font-size-controls {
+    display: flex;
+    gap: 6px;
+    background-color: var(--content-bg-light);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+body.dark-mode .font-size-controls {
+    background-color: var(--content-bg-dark);
+}
+
+.font-size-btn,
+#download-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.font-size-btn:hover,
+#download-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .font-size-btn:hover,
+body.dark-mode #download-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.font-size-btn.active {
+    background-color: var(--accent-color-light);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .font-size-btn.active {
+    background-color: var(--accent-color-dark);
+}
+
+/* 활성 버튼에서의 아이콘 색상 */
+.font-size-btn.active svg,
+body.dark-mode .font-size-btn.active svg {
+    stroke: white;
+    fill: white;
+}
+
+#download-btn {
+    background-color: var(--content-bg-light);
+    border-radius: 8px;
+}
+
+body.dark-mode #download-btn {
+    background-color: var(--content-bg-dark);
+}
